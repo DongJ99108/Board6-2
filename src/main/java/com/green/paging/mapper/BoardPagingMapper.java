@@ -9,14 +9,16 @@ import com.green.board.dto.BoardDto;
 @Mapper
 public interface BoardPagingMapper {
 
-	int count(BoardDto boardDto);
-
-	List<BoardDto> getBoardPagingList(String menu_id, String title, 
-			String writer, String content, String keyword, int offset,
-			int numOfRows);
+	int count(BoardDto boardDto, String searchType, String keyword);
 
 	List<BoardDto> getBoardPagingList(
 			String menu_id, String searchType, String keyword,
 			int offset, int numOfRows);
+
+	BoardDto getBoard(BoardDto boardDto);
+
+	void deleteMenu(BoardDto boardDto, int nowpage);
+
+
 
 }

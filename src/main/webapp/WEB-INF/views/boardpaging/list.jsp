@@ -59,6 +59,11 @@
       }
    
    }
+   #search {
+     text-align : center;
+     width : 30%;
+     margin : 10px auto;
+   }
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -93,7 +98,7 @@
 	    <tr>
 	      <td> ${  board.idx      }  </td>    <!-- menu.getMenu_id() -->
 	      <td class="title"> 
-	        <a href ="/Board/View?idx=${board.idx}&menu_id=${menu_id}">
+	        <a href ="/BoardPaging/View?idx=${board.idx}&menu_id=${menu_id}&nowpage=${nowpage}">
 	        ${ board.title    }
 	        </a>  
 	      </td>
@@ -109,12 +114,12 @@
 	  <input type="hidden" name="menu_id" value="${ menu_id }" />	  
 	  <input type="hidden" name="nowpage" value="${ nowpage }" />
 	  </form> --%>
-	  <form action="/BoardPaging/List" >	
+	  <form action="/BoardPaging/List" method="get">	
 	  <input type="hidden" name="menu_id" value="${ menu_id }" />	  
-	  <input type="hidden" name="nowpage" value="1" />  
+	  <input type="hidden" name="nowpage" value="${ nowpage }" />  
 	  <div id="search">
 	    <select name="searchType">
-	      <option value="title">제목</option> 
+	      <option value="title">제목</option>      <!-- searchType = title -->
 	      <option value="content">내용</option> 
 	      <option value="writer">작성자</option> 
 	    </select>

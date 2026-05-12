@@ -23,8 +23,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		//  로그인 대상 페이지를 설정 "/**"  : ** 는 하위폴더포함
 		registry.addInterceptor( authInterceptor )
 		   // .addPathPatterns("/**")
-		    // .addPathPatterns("/Board/**", "/BoardPaging/**") // 페이징 된 보드도 무조건 로그인 후에 접속하게끔
-		    .addPathPatterns("/Board/**")
+			// .addPathPatterns("/Board/**")
+		    .addPathPatterns("/Board/**", "/BoardPaging/**") // 페이징 된 보드도 무조건 로그인 후에 접속하게끔
 		    .excludePathPatterns("/css/**", "/img/**", "/js/**");
 				
 		WebMvcConfigurer.super.addInterceptors(registry);
