@@ -192,15 +192,25 @@ public class UserController {
 	public  String   login( UserDto userDto, 
 			HttpServletRequest request ) {
 		
-		UserDto      user     =  userMapper.getUser( userDto );
+		UserDto      user     =  userMapper.getLogin( userDto );
 		
 		HttpSession  session  =  request.getSession();
 		session.setAttribute("login", user);
 		
-		String       loc      = session.getAttribute("loc") + ""; 
+		String       loc      = ""; 
 		// + "" 를 붙인건 getAttribute를 쓸때에 무조건 문자열이어야 하기때문에 뒤에 ""를 붙여서 강제로 문자열 타입으로 바꾼것, 정석적인 방법은 ToString을 쓰는것
 		
-		return  "redirect:" + loc;
+		// http://localhost:8080, 즉 "/" 주소가 이전주소일때는
+		// session.getAttribute("loc") -> null 이다, 이동주소 : /Users/null 로 인식
+		if( session.getAttribute("loc") == null ) {
+			loc = "redirect:/";
+		} else {
+			loc = "redirect:" + session.getAttribute("loc").toString();
+			// 안되면 redirect: 빼기
+		}
+		// System.out.println("loc:" + loc);
+		
+		return loc;
 		
 	}
 	

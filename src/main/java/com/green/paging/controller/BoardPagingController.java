@@ -111,6 +111,11 @@ public class BoardPagingController {
 		// idx 로 게시글 한 개 조회
 		BoardDto      board    = boardPagingMapper.getBoard( boardDto );
 		
+		// 조회된 content 의 "\n" -> "<br>" 엔터가 띄어쓰기로 바뀌는것을 해결하는 코드
+		String content = board.getContent();
+		if(content != null)
+			board.setContent( content.replace("\n", "<br>") );
+		
 		String        menu_id  = boardDto.getMenu_id();
 		
 		ModelAndView  mv       = new ModelAndView();
@@ -178,6 +183,50 @@ public class BoardPagingController {
 				""".formatted(menu_id, nowpage);
 		mv.setViewName( loc );
 		
+		return mv;
+	}
+	
+	// 게시글 수정(페이징)
+	// /BoardPaging/UpdateForm?idx=814&menu_id=MENU05&nowpage=1
+	@RequestMapping("/UpdateForm")
+	public ModelAndView updateForm( BoardDto boardDto, int nowpage ) {
+		
+		// 메뉴 목록
+		List<MenuDTO> menuList = menuMapper.getMenuList();
+		
+		
+		// 수정할 페이지에 출력할 자료를 idx 로 조회
+		BoardDto    board = boardPagingMapper.getBoard(boardDto);
+		
+		// 수정할 페이지로 이동
+		String menu_id = boardDto.getMenu_id();
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("boardpaging/update");
+		
+		mv.addObject("menuList", menuList);
+		
+		mv.addObject("menu_id", menu_id);
+		mv.addObject("nowpage", nowpage);
+		mv.addObject("board", board);
+		
+		return mv;
+	}
+	
+	// /BoardPaging/Update
+	// idx=814&menu_id=MENU05&nowpage=1&title=aaaa&content=aaaa
+	@RequestMapping("/Update")
+	public ModelAndView update(BoardDto boardDto, int nowpage) {
+		
+		// 넘어온 값으로 db 정보 수정
+		boardPagingMapper.updateBoard( boardDto );
+		
+		// List 로 돌아간다.
+		String       menu_id  = boardDto.getMenu_id();
+		ModelAndView mv       = new ModelAndView();
+		String       loc      = """
+				redirect:/BoardPaging/List?menu_id=%s&nowpage=%d
+				""".formatted( menu_id, nowpage );
+		mv.setViewName( loc );
 		return mv;
 	}
 	

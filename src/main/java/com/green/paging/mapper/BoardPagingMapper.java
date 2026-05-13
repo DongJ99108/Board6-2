@@ -23,6 +23,8 @@ public interface BoardPagingMapper {
 
 	void incHit(BoardDto boardDto);
 
+	void updateBoard(BoardDto boardDto);
+
 
 
 }

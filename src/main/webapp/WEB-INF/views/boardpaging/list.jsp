@@ -74,7 +74,7 @@
 	<main>
 	  <%@include file="/WEB-INF/include/menuspaging.jsp" %> 
 	
-	  <h2 class="h2">${ menu.menu_name } 게시물 목록</h2>
+	  <h2 class="h2"><b id="mname">${ menu.menu_name }</b> 게시물 목록</h2>
 	  <table id="list" class="table  table-hover">
  
 	    <tr>
@@ -131,6 +131,13 @@
 	  <%@include file="/WEB-INF/include/paging.jsp" %>
 	  
 	</main>
+	
+	<!-- Javascript -->
+	<script>
+	  const mnameEl      = document.querySelector('#mname');
+	  let   menunameEl   = document.querySelector('.menu .active')
+	  mnameEl.innerHTML  = menunameEl.innerHTML;
+	</script>
 </body>
 </html>
 
