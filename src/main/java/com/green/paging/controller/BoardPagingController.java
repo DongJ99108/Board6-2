@@ -125,21 +125,6 @@ public class BoardPagingController {
 		return mv;
 	}
 	
-	// /BoardPaging/Delete?idx=207&menu_id=MENU01&nowpage=1
-	@RequestMapping("/Delete")
-	public ModelAndView delete( BoardDto boardDto, int nowpage ) {
-		
-		boardPagingMapper.deleteMenu( boardDto, nowpage );
-		
-		String menu_id = boardDto.getMenu_id();
-		
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("boardpaging/list");
-		mv.addObject("menu_id", menu_id);
-		mv.addObject("nowpage", nowpage);
-		
-		return mv;
-	}
 	
 	// /BoardPaging/WriteForm?menu_id=MENU01&nowpage=1
 	@RequestMapping("/WriteForm")
@@ -175,6 +160,24 @@ public class BoardPagingController {
 		String       fmt     = "redirect:/BoardPaging/List?menu_id=%s&nowpage=%d";
 		String       loc     = String.format(fmt, menu_id, 1);
 		mv.setViewName( loc );
+		return mv;
+	}
+	// /BoardPaging/Delete?idx=207&menu_id=MENU01&nowpage=1
+	@RequestMapping("/Delete")
+	public ModelAndView delete( BoardDto boardDto, int nowpage ) {
+		
+		boardPagingMapper.deleteMenu( boardDto );
+		
+		String menu_id = boardDto.getMenu_id();
+		
+		ModelAndView mv = new ModelAndView();
+		// String fmt = "redirect:/BoardPaging/List?menu_id=%s&nowpage=%d";
+		// String loc = String.format(fmt, menu_id, 1);
+		String loc = """
+				redirect:/BoardPaging/List?menu_id=%s&nowpage=%d
+				""".formatted(menu_id, nowpage);
+		mv.setViewName( loc );
+		
 		return mv;
 	}
 	
