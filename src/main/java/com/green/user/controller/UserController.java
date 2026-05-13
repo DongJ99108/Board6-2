@@ -197,7 +197,8 @@ public class UserController {
 		HttpSession  session  =  request.getSession();
 		session.setAttribute("login", user);
 		
-		String       loc      = session.getAttribute("loc") + ""; // + "" 를 붙인건 getAttribute를 쓸때에 무조건 문자열이어야 하기때문에 뒤에 ""를 붙여서 강제로 문자열 타입으로 바꾼것, 정석적인 방법은 ToString을 쓰는것
+		String       loc      = session.getAttribute("loc") + ""; 
+		// + "" 를 붙인건 getAttribute를 쓸때에 무조건 문자열이어야 하기때문에 뒤에 ""를 붙여서 강제로 문자열 타입으로 바꾼것, 정석적인 방법은 ToString을 쓰는것
 		
 		return  "redirect:" + loc;
 		

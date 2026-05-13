@@ -19,6 +19,10 @@ public interface BoardPagingMapper {
 
 	void deleteMenu(BoardDto boardDto, int nowpage);
 
+	void insertBoard(BoardDto boardDto);
+
+	void incHit(BoardDto boardDto);
+
 
 
 }

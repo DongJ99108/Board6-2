@@ -9,7 +9,7 @@
       <c:forEach var="menu"  items="${ menuList }">
         <td>
          <%-- <a href="/BoardPaging/List?menu_id=${menu.menu_id}&nowpage=${nowpage}" --%>
-         <a href="/BoardPaging/List?menu_id=${menu.menu_id}&nowpage=${nowpage}"
+         <a href="/BoardPaging/List?menu_id=${menu.menu_id}&nowpage=1"
    			class="${menu.menu_id eq menu_id ? 'active' : ''}">
    				${menu.menu_name}
 		 </a>
